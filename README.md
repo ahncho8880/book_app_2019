@@ -1,2 +1,2 @@
-# book_info_2019
+# book_browser_2019
 book browser website with spring, jsp, oracleDB
