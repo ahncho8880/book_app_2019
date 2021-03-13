@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.minnano.dao.BookDao">
+
+	<select id="bookinfo" resultType="BookBean">
+		SELECT * FROM BOOK
+	</select>
+
+	<select id="newbookinfo" resultType="BookBean">
+
+		SELECT * FROM (SELECT * FROM BOOK ORDER BY bReg DESC) WHERE 
+	<![CDATA[
+		ROWNUM<=3
+	]]>
+	</select>
+
+	<select id="bestbookinfo" resultType="BookBean">
+<![CDATA[
+	SELECT * FROM (SELECT * FROM BOOK ORDER BY BPOINT DESC) WHERE ROWNUM<=3
+	]]>
+	</select>
+
+	<select id="select_book" resultType="BookBean">
+		SELECT * FROM BOOK WHERE bNum=#{bNum}
+	</select>
+
+	<select id="search_book" resultType="BookBean">
+	<![CDATA[
+	SELECT * FROM BOOK WHERE bName LIKE '%'||#{bName}||'%'
+	]]>
+	</select>
+	
+	<select id="allnew_book" resultType="BookBean">
+		<![CDATA[
+		SELECT * FROM BOOK ORDER BY BREG DESC 
+	]]>
+	</select>
+	<select id="allhit_book" resultType="BookBean">
+		<![CDATA[
+		SELECT * FROM BOOK ORDER BY BPOINT DESC 
+	]]>
+	</select>
+	<select id="allcatagory_book" resultType="BookBean">
+		<![CDATA[
+		SELECT * FROM BOOK WHERE BGENRE=#{bGenre} ORDER BY BREG DESC 
+	]]>
+	</select>
+	
+</mapper>

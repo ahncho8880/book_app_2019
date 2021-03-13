@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.minnano.dao.PointDao">
+<insert id="insert">
+<![CDATA[
+        INSERT INTO POINT 
+        VALUES(#{pId}, #{pbNum}, #{pScore})
+]]>
+</insert>
+<select id="show" resultType="int">
+<![CDATA[
+	SELECT PSCORE FROM POINT WHERE PID = #{pId} AND PBNUM = #{pbNum}
+]]>
+</select>  
+<select id="avg" resultType="double">
+<![CDATA[
+	SELECT ROUND(AVG(PSCORE),2) FROM POINT,DUAL WHERE PBNUM=#{pbNum}
+]]>
+</select>  
+</mapper>

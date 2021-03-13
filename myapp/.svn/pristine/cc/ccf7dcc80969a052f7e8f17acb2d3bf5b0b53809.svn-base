@@ -1,0 +1,40 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>	    
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>게시판 글보기</title>
+</head>
+<body>
+	<form role='form'>
+		<input type="hidden" name="num" value='${detailBean.eNum}' />
+	</form>
+
+	<div>
+		<h2>게시글 상세</h2>
+		
+		<div>
+			<label>No.</label>
+			<input type="text" value='${detailBean.eNum}' readonly='readonly'/>
+		</div>
+		<div>
+			<label>작성자</label>
+			<input type="text" value='${detailBean.eId}' readonly='readonly'/>
+		</div>
+		<div>
+			<label>제목</label>
+			<input type="text" value='${detailBean.eSubject}' readonly='readonly'/>
+		</div>
+		<div>
+			<label>내용</label>
+			<input type="text" value='${detailBean.eContent}' readonly='readonly'/>
+		</div>
+
+	</div>
+</body>
+</html>

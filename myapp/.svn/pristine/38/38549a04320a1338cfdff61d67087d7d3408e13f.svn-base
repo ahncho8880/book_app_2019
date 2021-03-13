@@ -1,0 +1,39 @@
+package com.minnano.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.minnano.dao.BoardDao;
+import com.minnano.model.BoardBean;
+
+@Service
+public class BoardServiceImpl implements BoardService{
+
+	@Autowired
+	private BoardDao boardDao;
+	//private BoardBean boardBean;
+	
+	@Override
+	public List<BoardBean> list(int booknum, int pagenum, int contentnum) {
+		System.out.println("BoardServiceImpl...="+ booknum + ", "+  pagenum + "," + contentnum);
+
+		return boardDao.testList(booknum ,pagenum, contentnum);
+	}
+
+	@Override
+	public int Calltestcount(){
+		return boardDao.testcount();
+	}
+	
+	@Override
+	public BoardBean listOne(String num){
+		
+		return boardDao.listOne(num);
+	}
+
+}

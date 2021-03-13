@@ -1,0 +1,123 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<link href="resources/bootstrap/css/DetailPage.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<head>
+<style>
+p.thick {
+	font-weight: bold;
+	font-size: 20px;
+}
+</style>
+<script type="text/javascript">
+	var result = '{msg}';
+
+	if (result == "success") {
+		alert("정상적으로 처리되었습니다.");
+	}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head>
+<body>
+	<%@include file="navi2.jsp"%>
+	<br>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-4 item-photo">
+				<img style="max-width: 100%;"
+					src="/resources/bootstrap/images/${bookinfo[0].bImg}" />
+			</div>
+			<div class="col-xs-5" style="border: 0px solid gray">
+				<!--책 정보 정보 -->
+				<h2>${bookinfo[0].bName}</h2>
+				<h5 style="color: #337ab7">
+					저자 <a href="#"> | ${bookinfo[0].bWriter}</a>
+				</h5>
+				<h5 style="color: #337ab7">
+					역자 <a href="#"> | ##</a>
+				</h5>
+				<h5 style="color: #337ab7">
+					등록일 <a href="#"> | ${bookinfo[0].bReg}</a>
+				</h5>
+				<h5 style="color: #337ab7">
+					장르<a href="#"> | ${bookinfo[0].bGenre}</a>
+				</h5>
+				<h6 class="title-price">
+					<small>FRANCE</small>
+				</h6>
+				<br> <br> <br>
+			</div>
+			<div class="col-xs-9">
+				<ul class="menu-items">
+					<div style="width: 100%; border-top: 1px solid silver">
+						<li><h2>책소개</h2>
+							<div>
+								<p class="thick">${bookinfo[0].bIntro}</p>
+								<br>${bookinfo[0].bSynop}<br> <br>
+							</div></li>
+						<div style="width: 100%; border-top: 1px solid silver">
+							<!-- 				<li><h2>출판사 서평</h2>
+							<div>
+								<p class="thick">
+									지금 이 순간에도 가짜 뉴스는 당신을 노리고 있다!<br> 우리 시대 최고의 지성<br>
+									움베르토 에코의 마지막 소설!<br>
+								</p>
+								<br>
+								<p class="thick">
+									역사에 관한 또 하나의 음모론,<br> 무솔리니가 살아 있다?!<br>
+								</p>
+								<br> 소설의 배경은 1992년, 실제 이탈리아에서 전무후무한 정치 스캔들이 터지며 대대적인 부패
+								청산의 물결이 일던 시기이다. 막대한 자금력과 조직력으로 무장한 세력가를 배후에 둔 어느 신문사의 편집부가 주
+								무대로, 무솔리니의 죽음을 둘러싼 황색 언론의 행태가 생생하게 그려진다. 사라진 무솔리니의 흔적을 추적하며 교황,
+								정치가, 테러리스트, 은행, 마피아, CIA, 프리메이슨까지 얽힌 폭로 기사를 준비하던 기자는 등에 칼을 맞고
+								살해된 채 발견된다.<br> 1990년대 이탈리아의 [마니 풀리테Mani Pulite(깨끗한 손)]
+								운동은 뿌리 깊은 부정부패에서 기인한 것이었다. 정계의 구조적 비리가 공개되면서 세상이 떠들썩해졌고 검찰 수사가
+								진행됐다. 밀라노뿐 아니라 수십여 개의 도시에서 4천여 명에 이르는 정치인, 공무원 기업인들이 조사를 받았으며
+								그중 1천여 명이 구속된 바 있다. 사회당의 크락시는 튀니지로 망명했으며 기민당의 안드레오티 전 수상의 마피아
+								관련 혐의가 발각되었다. 그 결과 이탈리아의 3당 체제는 붕괴하고 미디어 재벌 출신의 베를루스코니의 전진
+								이탈리아당과 우파 연합, 좌파 연합 중심으로 정계가 재편되었다. 제1공화국이 막을 내리고 제2공화국이 들어섰다.
+								하나 격동의 세월이 있었음에도 자기반성 없는 표면적 혁신으로 그곳의 뇌물 전쟁과 비리는 여전하다. 무엇보다,
+								막대한 자금력과 조직력으로 무장한 정치가와 그가 이끄는 언론 플레이는 사회의 건강을 해치는 주범이 아닐 수 없다.
+								[제0호]는 배경이 되는 이탈리아를 비롯해, 지대를 막론하고 현대 사회인의 무의식에 침투하는 매스 미디어의 광포한
+								영향력을 곱씹게 한다.<br> 이렇듯 내용적 측면에서는 정치적 성공을 도모할 목적으로 미디어를 이용하는
+								강력한 기업인, [특종]을 강요받는 저널리스트, 그리고 그러한 취재 과정에서 희생양이 되고 마는 대중에 대한
+								고찰이 주를 이룬다. 그러나 에코는 특유의 해학을 버무리고, 혼란한 바깥 사정과 별개로 새롭게 뿌리 내리는 인간
+								사이의 애정과 연대를 제시한다. 이전의 그 어느 작품보다 단순명료한 문체와 구성은 오롯이 대중을 향한 것으로 큰
+								울림을 전한다.<br> <br> 우매한 대중을 노리는 특종 전쟁.<br> 결코 발행되지
+								않을 신문의 배후에 도사린<br> 거대한 미스터리 -<br> <br> 1954년
+								이탈리아에서 텔레비전 방송이 처음 개시된 때로부터 RAI(이탈리아 방송 협회)의 문화 프로그램 제작 종사자로 일한
+								경험이 있는 에코는 그 누구보다도 매스 미디어의 생리에 통달해 있으며 과연 그 아닌 누군가 이토록 명철한 지각을
+								지닐 수 있을까 의문이 들리만치 예리하게 세간을 다룬다. [제0호]는 역사적 사건에 관한 복잡한 음모론을 다루지만
+								결코 절망적이지 않으며, 재치 넘치면서도 신랄한 비판으로 번뜩인다. 무엇을 믿어야 하며 어디까지가 진실인가
+								고심하는 독자에게 이 소설은 과연 하나의 지표가 될 것이다.<br> <br> [제0호]는
+								저널리스트의 문체로 저널리즘의 세계를 다룬다. 실패한 글쟁이들과 음모론에 잘 빠지는 기자와 나쁜 저널리즘을 보여
+								주는 익살스럽고 풍자적인 이야기이다.<br> ('옮긴이의 말' 중에서)<br> <br>
+							</div></li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div>
+		<%@ include file="list.jsp"%>
+		<br><br>
+		<%@include file="footer.jsp"%>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="resources/bootstrap/js/bootstrap.js"></script>
+</html>

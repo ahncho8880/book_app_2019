@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.minnano.dao.BoardDao">
+
+<!-- 	<select id="listAll" resultType="BoardBean">
+	    SELECT
+	    	*
+	    FROM
+	    	EVAL
+	    ORDER BY eNum DESC 
+	</select> -->
+	
+ 	<select id="listOne"  resultType="BoardBean">
+		SELECT
+			*
+		FROM
+			EVAL
+		WHERE
+			eNum = #{eNum}
+	</select>
+
+	<select id="testList" parameterType="int" resultType="BoardBean">
+	<![CDATA[
+		SELECT
+			*
+		FROM
+			EVAL
+		WHERE
+		ebNum = #{bookNum} AND eNum >= #{pageNum} AND ROWNUM <= #{contentNum} AND EAvailable=1
+		ORDER BY eNum asc
+	]]>
+	</select>
+	
+	<select id="testcount" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			EVAL
+	</select>
+	
+</mapper>

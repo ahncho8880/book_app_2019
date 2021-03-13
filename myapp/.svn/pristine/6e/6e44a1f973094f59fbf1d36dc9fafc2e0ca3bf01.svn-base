@@ -1,0 +1,144 @@
+package com.minnano.myapp;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.minnano.dao.BoardDao;
+import com.minnano.model.BoardBean;
+import com.minnano.service.BoardService;
+
+@Controller
+public class BookController {
+	
+	Logger logger = LoggerFactory.getLogger("BookController");
+	
+	@Autowired
+	private BoardService boardService;
+
+	//�۾��� �� �̵�
+	@RequestMapping(value="/report", method=RequestMethod.GET)
+	public String report(){
+
+		return "book/report";
+	}
+
+	//�� �� ����
+	@RequestMapping(value="/read",method = RequestMethod.GET)
+	public String readBook(HttpServletResponse response, @RequestParam("num") String num, @RequestParam("logon") boolean logon, Model model){
+		System.out.println("aaaaaaaaaaaa");
+		System.out.println("read num=" + num);
+		logger.info("logon=> "+logon);
+		if(logon){
+			BoardBean bean = boardService.listOne(num);
+			model.addAttribute("detailBean",bean);
+			System.out.println(bean.toString());
+			return "book/bookReadPage";			
+		}
+		try {
+			response.setContentType("text/html; charset=UTF-8"); 
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('you need login');  location.href='dologin'; </script>");
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "main/login";
+	}
+
+	//� ���������� �������� ���� �� ��
+	//http://localhost:8088/book/home
+	/*@RequestMapping("home")
+	public String Info(){
+		
+		return "forward:book/list";
+	}*/
+	//�����͸� ������ ���� forward
+	
+/*	@RequestMapping("list")
+	public String list(HttpServletRequest request){
+	
+		Pagination pagination = new Pagination();
+		String pagenum = request.getParameter("pagenum");
+		String contentnum = request.getParameter("contentnum");
+		int cpagenum = getIntParam(request, "pagenum");
+		int ccontentnum = getIntParam(request, "contentnum");
+		
+		//int cpagenum = Integer.parseInt(pagenum);
+		//int ccontentnum = Integer.parseInt(contentnum);
+		cpagenum =(cpagenum == 0? 1: cpagenum);		
+		ccontentnum = (ccontentnum == 0? 10: ccontentnum);
+		
+		pagination.setTotalcount(boardService.Calltestcount());	//��ü �Խñ� ������ ��Ī�Ѵ�.
+		pagination.setPagenum(cpagenum-1);				//���� �������� ������ ��ü�� ��Ī�Ѵ�.
+		pagination.setContentnum(ccontentnum);		//�� �������� ��� �Խñ��� �������� ��Ī�Ѵ�.
+		pagination.setCurrentblock(cpagenum);		//���� ������ ����� ������� ���� ������ ��ȣ�� ���ؼ� ��Ī�Ѵ�.
+		pagination.setLastblock(pagination.getTotalcount());	//������ ��� ��ȣ�� ��ü �Խñ� ���� ���ؼ� ��Ī�Ѵ�.
+		
+		pagination.prevnext(cpagenum);	//���� ������ ��ȣ�� ȭ��ǥ�� ��Ÿ���� ���Ѵ�.
+		pagination.setStartPage(pagination.getCurrentblock());	//���� �������� ������ ��� ��ȣ�� ���Ѵ�.
+		pagination.setEndPage(pagination.getLastblock(), pagination.getCurrentblock());
+		//������ �������� ������ ������ ��ϰ� ���� ������ ��� ��ȣ�� ���Ѵ�.
+
+		 List<BoardBean> testlist = boardService.list(pagination.getPagenum()*10, pagination.getContentnum());
+
+		request.setAttribute("list", testlist);
+		request.setAttribute("page", pagination);
+		return "book/book_info";
+	}*/
+	
+	//å ���� ������ �� �⺻������ ��Ÿ�� �Խñ� �⺻ ����
+	/*private int getIntParam(HttpServletRequest request, String key) {
+		int ret = 0;
+		
+		try {
+			ret = Integer.parseInt(request.getParameter(key));
+		} catch (Exception ex) {
+			ret = 0;
+		}
+		
+		return ret;
+	}*/
+	
+	//å ���� ����
+/*	@RequestMapping(value="/bookinfo", method=RequestMethod.GET)
+	public String bookinfo(Model model){
+		
+		List<BoardBean> boards = boardService.list();
+		
+		System.out.println("board"+boards.toString());
+		model.addAttribute("boardList",boards);
+		return "book/book_info";
+	}*/
+	
+
+/*	@RequestMapping(value="/bookinfo", method=RequestMethod.GET)
+	public String boardList(HttpServletRequest request, BoardBean boardbean,
+							 Model model) throws Exception{
+		
+		//HttpServletRequest request,
+		//List<BoardBean> boards = boardService.list();
+		//@ModelAttribute("boardbean")
+		List<BoardBean> boards = boardService.getArticle(boardbean);
+		model.addAttribute("boardList",boards);
+		
+		return "book/book_info";
+	}*/
+	
+}

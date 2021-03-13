@@ -1,0 +1,11 @@
+package com.minnano.service;
+
+import java.util.HashMap;
+
+import com.minnano.model.PointBean;
+
+public interface PointService {
+	public void insert_point(PointBean pointbean);
+	public int show_point(HashMap<String, Object> show);
+	public double avg_point(PointBean pointbean);
+}

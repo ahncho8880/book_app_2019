@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.minnano.dao.BoardDao">
+
+ <select id="listOne" resultType="BoardBean">
+   <![CDATA[    
+      SELECT
+         *
+      FROM
+         EVAL
+      WHERE
+         eNum = #{num}
+   ]]>
+   </select>
+      
+   <select id="testlist" resultType="BoardBean">
+   <![CDATA[
+      SELECT
+         *
+      FROM
+         EVAL
+      WHERE
+         ebNum = #{bookNum} AND eNum > #{pageNum} AND ROWNUM <= #{contentNum} AND EAvailable=1
+      ORDER BY eNum ASC
+   ]]>
+   </select>
+   
+   <select id="testcount" resultType="int">
+   <![CDATA[   
+      SELECT
+         count(*)
+      FROM
+         EVAL
+      WHERE
+          ebNum = #{booknum}
+   ]]>          
+   </select>
+   <select id="write_IdNumCount" resultType="int">
+   <![CDATA[   
+      SELECT
+         eNum
+      FROM (SELECT eNum FROM EVAL ORDER BY eNum DESC) WHERE ROWNUM=1
+   ]]>          
+   </select>
+   <insert id="write">
+   <![CDATA[
+      INSERT INTO
+         EVAL
+      VALUES(#{eNum},#{ebNum},#{eSubject},#{eContent},0,0,#{eId},0,sysdate,1)
+   ]]>
+   </insert>
+   <update id="modify">
+   <![CDATA[      
+      UPDATE 
+         EVAL
+      SET 
+         eid=#{eId}, esubject=#{eSubject}, econtent=#{eContent}
+      WHERE
+         eNum=#{eNum}
+   ]]>            
+   </update>
+   <delete id="drop">
+   <![CDATA[
+      DELETE FROM EVAL
+      WHERE
+         eNum=#{eNum}
+   ]]>   
+   </delete>   
+</mapper>
